@@ -1,0 +1,57 @@
+﻿@page "/Model1/Index"
+@inject Model1Service model1Service;
+
+<h3>Model1Index</h3>
+<div class="container">
+    <div class="card shadow-lg">
+        <div class="card-header d-flex justify-content-between align-content-center mb-4">
+            <h5 class="card-title"> Registro Model1</h5>
+            <a href="" class="btn btn-primary"><span class="bi bi-plus-square mt-3">Crear</span></a>
+        </div>
+
+        <div class="card-body">
+            @*Labels*@
+            <div class="row">
+                @*filtrar*@
+                <div class="col-3">
+                    <label class="col-form-label"><strong>Filtrar</strong></label>
+                </div>
+                @*Valor filtro*@
+                <div class="col-4">
+                    <label class="col-form-label"><strong>Busqueda</strong></label>
+                </div>
+            </div>
+            @*inputs y botones*@
+            <div class="row align-items-center">
+                @*filtro*@
+                <div class="col-3">
+                    <InputSelect class="form-select" @bind-Value="Filtro">
+                        <option value=""selected disables> Elija una opcion</option>
+                        <option value="Value1">Value1</option>
+                        <option value="Value2">Value2</option>
+                    </InputSelect>
+                </div>
+                @*Busqueda*@
+                <div class="col-4">
+                    <div class="input-group">
+                        <input class="form-control" @bind="ValorFiltro" placeholder="Buscar" />
+                        <button type="button" class="btn btn-outline-primary bi bi-search" @onclick="Buscar"></button>
+                    </div>
+                </div>
+            </div>
+            @*quickgrid*@
+        </div>
+        @*footer*@
+    </div>
+</div>
+@*eliminar modal*@
+
+@code {
+    public string Filtro { get; set; } = string.Empty;
+    public string ValorFiltro { get; set; } = string.Empty;
+
+    public void Buscar()
+    {
+        
+    }
+}

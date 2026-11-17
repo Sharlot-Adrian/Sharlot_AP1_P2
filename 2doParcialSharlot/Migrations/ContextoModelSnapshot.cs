@@ -23,6 +23,10 @@ namespace _2doParcialSharlot.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<double>("Precio")
                         .HasColumnType("REAL");
 
@@ -32,6 +36,43 @@ namespace _2doParcialSharlot.Migrations
                     b.HasKey("ProductoId");
 
                     b.ToTable("Productos");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductoId = 1,
+                            Nombre = "Latte de Caramelo",
+                            Precio = 210.0,
+                            Stock = 10
+                        },
+                        new
+                        {
+                            ProductoId = 2,
+                            Nombre = "Cappuchino",
+                            Precio = 200.0,
+                            Stock = 10
+                        },
+                        new
+                        {
+                            ProductoId = 3,
+                            Nombre = "Americano",
+                            Precio = 120.0,
+                            Stock = 10
+                        },
+                        new
+                        {
+                            ProductoId = 4,
+                            Nombre = "Frape",
+                            Precio = 150.0,
+                            Stock = 10
+                        },
+                        new
+                        {
+                            ProductoId = 5,
+                            Nombre = "Espresso",
+                            Precio = 150.0,
+                            Stock = 10
+                        });
                 });
 
             modelBuilder.Entity("_2doParcialSharlot.Models.Ventas", b =>

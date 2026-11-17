@@ -98,6 +98,7 @@ namespace _2doParcialSharlot.Service
 
             original.Fecha = venta.Fecha;
             original.Total = venta.Total;
+            original.Concepto = venta.Concepto;
             
             return await contexto.SaveChangesAsync() > 0;
         }

@@ -10,6 +10,8 @@ namespace _2doParcialSharlot.Models
         [Required(ErrorMessage = "Es obligatorio agregar la fecha. ")]
         public DateTime Fecha { get; set; }
         public string Observacion { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Es obligatorio agregar el Concepto. ")]
+        public string Concepto { get; set; } = string.Empty;
         public double Total { get; set; }
 
         [InverseProperty("Ventas")]

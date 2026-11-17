@@ -81,6 +81,10 @@ namespace _2doParcialSharlot.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Concepto")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("TEXT");
 

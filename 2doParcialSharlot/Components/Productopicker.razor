@@ -1,12 +1,12 @@
 ﻿@using _2doParcialSharlot.Models
 <div class="col-auto input-group align-items-center">
-    <label class="col-form-label input-group-text">Seleccioe: </label>
+    <label class="col-form-label input-group-text">Seleccione: </label>
 
     <InputSelect class="form-control form-select" @bind-Value="ProductoId">
         <option disabled value="0"> --Seleccione un producto --</option>
         @foreach (var producto in listaProductos)
         {
-            <option value="@producto.ProductoId">@producto.Nombre (@producto.Stock)</option>
+            <option value="@producto.ProductoId">@producto.Nombre (Stock :@producto.Stock)</option>
         }
     </InputSelect>
     <button type="button" class="btn btn-outline-success bi bi-plus" @onclick="TriggerSeleccion">Agregar</button>
@@ -26,7 +26,7 @@
     public int ProductoId{ get; set; }
     [Parameter]
     public EventCallback<Productos> OnProductoSelected { get; set; }
-    private string? ErrorMessage = string.Empty;
+    private string? ErrorMessage = null;
 
 
     private async Task TriggerSeleccion()

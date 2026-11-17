@@ -11,12 +11,13 @@
 <DataAnnotationsValidator/>
     <div class="container">
         <div class="card shadow-lg">
+
             <div class="card-header text-center">
                 <h5 class="card-title">Editar Venta</h5>
             </div>
-        </div>
+        
 
-     <div class="container-body">
+     <div class="card-body">
          <div class="d-flex justify-content-between">
              @*id*@
              <div class="mb-3">
@@ -35,10 +36,12 @@
              <InputText class="form-control" @bind-Value="Venta.Concepto"></InputText>
              <ValidationMessage For="(() => Venta.Concepto)"></ValidationMessage>
          </div>
-         @*Total*@
-            <div class="mb-3">
-                <label class="form-label"><strong>Total</strong></label>
-                <InputNumber class="form-control" @bind-Value="Venta.Total"></InputNumber>
+            @*Total*@
+            <div class="row mt-3">
+                <div class="mb-3">
+                    <label class="form-label"><strong>Total: </strong></label>
+                    <label class="form-control">@Venta.Total</label>
+                </div>
             </div>
         @*Detalle*@
         <div class="border border-secondary pt-3 mt-3">
@@ -66,23 +69,16 @@
                     </QuickGrid>
                 }
                 <hr />
-
-                @*Total*@
-                <div class="row mt-3">
-                    <div class="mb-3">
-                        <label class="from-label"><strong>Total: </strong></label>
-                        <label class="form-control">@Venta.Total</label>
-                    </div>
-                </div>
-
+        </div>
                 @*footer*@
                 <div class="card-footer d-flex justify-content-between align-items-center">
                     <a href="/Ventas/Index" class="btn btn-secondary"><span class="bi bi-arrow-left"></span>Volver</a>
-                    <button type="button" class="btn btn-danger bi bi-trash" data-bs-toggle="modal" data-bs-target ="#eliminacionModal">Eliminar</button>
+                    <button type="button" class="btn btn-danger bi bi-trash" data-bs-toggle="modal" data-bs-target="#eliminacionModal">Eliminar</button>
                     <button type="submit" class="btn btn-primary bi bi-floppy">Modificar</button>
                 </div>
-            </div>
+    </div>
      </div>
+       
     </div>
 </EditForm>
 

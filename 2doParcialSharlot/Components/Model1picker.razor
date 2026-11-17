@@ -1,15 +1,46 @@
-﻿@* <div class="col-auto input-group align-items-center">
+﻿@using _2doParcialSharlot.Models
+<div class="col-auto input-group align-items-center">
     <label class="col-form-label input-group-text">Seleccioe: </label>
 
-    <InputSelect class="form-control form-select" @bind-Value="Model1Id">
-        <option disabled value="0"> --Seleccione un Model1 --</option>
-        @foreach (var libro in libros)
+    <InputSelect class="form-control form-select" @bind-Value="ProductoId">
+        <option disabled value="0"> --Seleccione un producto --</option>
+        @foreach (var producto in listaProductos)
         {
-            
+            <option value="@producto.ProductoId">@producto.Nombre (@producto.Stock)</option>
         }
     </InputSelect>
-</div> *@
+    <button type="button" class="btn btn-outline-success bi bi-plus" @onclick="TriggerSeleccion">Agregar</button>
+</div> 
+
+@if (ErrorMessage != null)
+{
+    <div class="alert alert-danger mt-2" role="alert">
+        @ErrorMessage
+    </div>
+}
 
 @code {
+    [Parameter]
+    public List<Productos> listaProductos { get; set; } = [];
+    [Parameter]
+    public int ProductoId{ get; set; }
+    [Parameter]
+    public EventCallback<Productos> OnProductoSelected { get; set; }
+    private string? ErrorMessage = string.Empty;
 
+
+    private async Task TriggerSeleccion()
+    {
+        ErrorMessage = null;
+        if(ProductoId > 0)
+        {
+            var seleccionado = listaProductos.Single(p => p.ProductoId == ProductoId);
+            await OnProductoSelected.InvokeAsync(seleccionado);
+            ProductoId = 0;
+        }
+        else
+        {
+            ErrorMessage = "Debe seleccionar por lo menos un producto."
+        }
+    }
 }

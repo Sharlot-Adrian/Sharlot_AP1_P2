@@ -1,12 +1,13 @@
 ﻿@page "/Ventas/Index"
 @using _2doParcialSharlot.Models
-@* @inject Model1Service model1Service; *@
+@inject VentasService ventasService
 
-<h3>Model1Index</h3>
+<PageTitle> Index de Ventas </PageTitle>
 <div class="container">
+    <h3>Index de Ventas</h3>
     <div class="card shadow-lg">
         <div class="card-header d-flex justify-content-between align-content-center mb-4">
-            <h5 class="card-title"> Registro Model1</h5>
+            <h5 class="card-title"> Index de Ventas</h5>
             <a href="" class="btn btn-primary"><span class="bi bi-plus-square mt-3">Crear</span></a>
         </div>
 
@@ -28,8 +29,8 @@
                 <div class="col-3">
                     <InputSelect class="form-select" @bind-Value="Filtro">
                         <option value=""selected disables> Elija una opcion</option>
-                        <option value="Value1">Value1</option>
-                        <option value="Value2">Value2</option>
+                        <option value="Id">Id</option>
+                        <option value="Concepto">Concepto</option>
                     </InputSelect>
                 </div>
                 @*Busqueda*@
@@ -50,6 +51,10 @@
                         <PropertyColumn Property="v => v.Observacion" Sortable="true"></PropertyColumn>
                         <PropertyColumn Property="v => v.Concepto" Sortable="true"></PropertyColumn>
                         <PropertyColumn Property="v => v.Total" Sortable="true"></PropertyColumn>
+
+                        <TemplateColumn title="Opciones">
+                            <a href="/Ventas/Edit/@context.VentaId" class="btn btn-outline-primary bi bi-square-pencil">Editar</a>
+                        </TemplateColumn>
                     </QuickGrid>
                 </div>
             }
@@ -70,8 +75,26 @@
     public string ValorFiltro { get; set; } = string.Empty;
     public IQueryable<Ventas>? itemsQueryable;
 
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await ventasService.GetList(v => true);
+        itemsQueryable = result.Value.AsQueryable();
+    }
+
     public async Task Buscar()
     {
-        
+        if (ValorFiltro.Trim() != null && Filtro == "Id")
+        {
+            if(int.TryParse(ValorFiltro, out int id))
+            {
+                var lista = await ventasService.GetList(v => v.VentaId == id);
+                itemsQueryable = lista.Value.AsQueryable();
+            }
+        }
+        else if (ValorFiltro.Trim() != null && Filtro == "Concepto")
+        {
+            var conceptos = await ventasService.GetList(v => v.Concepto.ToLower().Contains(ValorFiltro.ToLower()));
+            itemsQueryable = conceptos.Value.AsQueryable();
+        }
     }
 }

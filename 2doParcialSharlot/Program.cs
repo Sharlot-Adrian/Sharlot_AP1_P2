@@ -1,5 +1,6 @@
 using _2doParcialSharlot.Components;
 using _2doParcialSharlot.Context;
+using _2doParcialSharlot.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,10 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddScoped<VentasService>();
+
 var ConStr = builder.Configuration.GetConnectionString("ConStr");
-builder.Services.AddDbContext<Contexto>(c => c.UseSqlite(ConStr));
+builder.Services.AddDbContextFactory<Contexto>(c => c.UseSqlite(ConStr));
 
 builder.Services.AddBlazorBootstrap();
+
 
 var app = builder.Build();
 

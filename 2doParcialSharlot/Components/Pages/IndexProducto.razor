@@ -1,5 +1,76 @@
-﻿<h3>IndexProducto</h3>
+﻿@page "/Productos/Index"
+@using _2doParcialSharlot.Models
+@inject VentasService ventasService;
+
+<h3>Ventas Index</h3>
+<div class="container">
+    <div class="card shadow-lg">
+        <div class="card-body">
+            @*Labels*@
+            <div class="row">
+                @*filtrar*@
+                <div class="col-3">
+                    <label class="col-form-label"><strong>Filtrar</strong></label>
+                </div>
+                @*Valor filtro*@
+                <div class="col-4">
+                    <label class="col-form-label"><strong>Busqueda</strong></label>
+                </div>
+            </div>
+            @*inputs y botones*@
+            <div class="row align-items-center">
+                @*filtro*@
+                <div class="col-3">
+                    <InputSelect class="form-select" @bind-Value="Filtro">
+                        <option value="" selected disables> Elija una opcion</option>
+                        <option value="Value1">Value1</option>
+                        <option value="Value2">Value2</option>
+                    </InputSelect>
+                </div>
+                @*Busqueda*@
+                <div class="col-4">
+                    <div class="input-group">
+                        <input class="form-control" @bind="ValorFiltro" placeholder="Buscar" />
+                        <button type="button" class="btn btn-outline-primary bi bi-search" @onclick="Buscar"></button>
+                    </div>
+                </div>
+
+            </div>
+            @*quickgrid*@
+            @if(itemsQueryable != null){
+               
+                <QuickGrid Items="itemsQueryable">
+                    <PropertyColumn Property="p => p.ProductoId" Sortable="true"></PropertyColumn>
+                    <PropertyColumn Property="p => p.Nombre" Sortable="true"></PropertyColumn>
+                    <PropertyColumn Property="p => p.Stock" Sortable="true"></PropertyColumn>
+                    <PropertyColumn Property="p => p.Precio" Sortable="true"></PropertyColumn>
+                </QuickGrid>
+            }
+        </div>
+        @*footer*@
+        <div class="card-footer justify-content-between align-content-center mt-2">
+            <label class="form-label"><strong>Cantidad de Registros: </strong></label>
+            <label class="form-label">@(itemsQueryable?.Count() ?? 0)</label>
+        </div>
+    </div>
+</div>
 
 @code {
+    public string Filtro { get; set; } = string.Empty;
+    public string ValorFiltro { get; set; } = string.Empty;
+    public IQueryable<Productos>? itemsQueryable;
 
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await ventasService.GetListProductos(v => true);
+        if (result != null)
+        {
+            itemsQueryable = result.Value.AsQueryable();
+        }
+    }
+
+    public async Task Buscar()
+    {
+        
+    }
 }

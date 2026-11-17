@@ -98,7 +98,7 @@ namespace _2doParcialSharlot.Service
 
             original.Fecha = venta.Fecha;
             original.Total = venta.Total;
-
+            
             return await contexto.SaveChangesAsync() > 0;
         }
         public async Task<Result<Ventas?>> Buscar(int id)
@@ -129,6 +129,14 @@ namespace _2doParcialSharlot.Service
             return await contexto.SaveChangesAsync() > 0 ? Result.Success(true) : Result.Failure(new Error("Error al eliminar", "No se pudo eliminar."));
         }
 
+        public async Task<Result<List<Productos>>> GetListProductos(Expression<Func<Productos, bool>> criterio)
+        {
+            await using var contexto = await contextFactory.CreateDbContextAsync();
+            return await contexto.Productos.Include(v => v.Detalle)
+                                        .Where(criterio)
+                                        .AsNoTracking()
+                                        .ToListAsync();
+        }
         public async Task<Result<List<Ventas>>> GetList(Expression<Func<Ventas, bool>> criterio)
         {
             await using var contexto = await contextFactory.CreateDbContextAsync();

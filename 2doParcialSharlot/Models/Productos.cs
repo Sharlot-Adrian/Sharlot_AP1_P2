@@ -8,6 +8,8 @@ namespace _2doParcialSharlot.Models
         [Key]
         public int ProductoId { get; set; }
         public string Nombre { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Es obligatorio agregar el Concepto. ")]
+        public string Concepto { get; set;  } = string.Empty;
         public int Stock { get; set; } = 10;
         [Required(ErrorMessage ="Es obligatorio agregar el precio. ")]
         public double Precio { get; set; }

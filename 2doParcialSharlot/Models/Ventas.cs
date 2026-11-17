@@ -7,6 +7,7 @@ namespace _2doParcialSharlot.Models
     {
         [Key]
         public int VentaId { get; set; }
+        [Required(ErrorMessage = "Es obligatorio agregar la fecha. ")]
         public DateTime Fecha { get; set; }
         public string Observacion { get; set; } = string.Empty;
         public double Total { get; set; }

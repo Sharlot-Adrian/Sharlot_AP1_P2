@@ -23,6 +23,10 @@ namespace _2doParcialSharlot.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Concepto")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -41,6 +45,7 @@ namespace _2doParcialSharlot.Migrations
                         new
                         {
                             ProductoId = 1,
+                            Concepto = "",
                             Nombre = "Latte de Caramelo",
                             Precio = 210.0,
                             Stock = 10
@@ -48,6 +53,7 @@ namespace _2doParcialSharlot.Migrations
                         new
                         {
                             ProductoId = 2,
+                            Concepto = "",
                             Nombre = "Cappuchino",
                             Precio = 200.0,
                             Stock = 10
@@ -55,6 +61,7 @@ namespace _2doParcialSharlot.Migrations
                         new
                         {
                             ProductoId = 3,
+                            Concepto = "",
                             Nombre = "Americano",
                             Precio = 120.0,
                             Stock = 10
@@ -62,6 +69,7 @@ namespace _2doParcialSharlot.Migrations
                         new
                         {
                             ProductoId = 4,
+                            Concepto = "",
                             Nombre = "Frape",
                             Precio = 150.0,
                             Stock = 10
@@ -69,6 +77,7 @@ namespace _2doParcialSharlot.Migrations
                         new
                         {
                             ProductoId = 5,
+                            Concepto = "",
                             Nombre = "Espresso",
                             Precio = 150.0,
                             Stock = 10

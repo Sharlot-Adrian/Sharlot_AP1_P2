@@ -6,9 +6,9 @@ using System.Linq.Expressions;
 
 namespace _2doParcialSharlot.Service
 {
-    public class Model1Service(IDbContextFactory<Contexto> contextFactory) : Aplicada1.Core.IServiceResult<Model1, int>
+    public class Model1Service(IDbContextFactory<Contexto> contextFactory) : Aplicada1.Core.IServiceResult<Ventas, int>
     {
-        public Task<Result<Model1?>> Buscar(int id)
+        public Task<Result<Ventas?>> Buscar(int id)
         {
             throw new NotImplementedException();
         }
@@ -18,12 +18,12 @@ namespace _2doParcialSharlot.Service
             throw new NotImplementedException();
         }
 
-        public Task<Result<List<Model1>>> GetList(Expression<Func<Model1, bool>> criterio)
+        public Task<Result<List<Ventas>>> GetList(Expression<Func<Ventas, bool>> criterio)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Result> Guardar(Model1 entidad)
+        public Task<Result> Guardar(Ventas entidad)
         {
             throw new NotImplementedException();
         }

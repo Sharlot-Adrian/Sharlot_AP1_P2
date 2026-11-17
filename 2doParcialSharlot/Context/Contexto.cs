@@ -6,6 +6,10 @@ namespace _2doParcialSharlot.Context
     public class Contexto : DbContext
     {
         public Contexto(DbContextOptions<Contexto> options) : base(options) { }
-        public DbSet<Model1> Model1 { get; set; }
+        public DbSet<Ventas> Ventas { get; set; }
+        public DbSet<Productos> Productos { get; set; }
+        public DbSet<VentasDetalle> VentasDetalle { get; set; }
+
+        
     }
 }
